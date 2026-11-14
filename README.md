@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/portada.png" alt="Pixel Spacefighter" width="420"></p>
+
 # Pixel Spacefighter (versión Pygame)
 
 Copia en Python + Pygame de [Pixel Spacefighter](https://github.com/algorithmicslab-stack/pixel-spacefighter): juego de plataformas y peleas en 3 sectores espaciales.
