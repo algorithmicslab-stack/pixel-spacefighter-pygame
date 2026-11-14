@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+partida.json
+.venv/
+.claude/
