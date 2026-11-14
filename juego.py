@@ -362,8 +362,12 @@ try:
     with open(P('assets', 'piloto.json'), encoding='utf-8') as f: _pj = json.load(f)
     sheet = _pj.get('sheet'); pilot = _pj.get('character') or pilot
     if sheet:
-        sheetImg = pygame.image.load(io.BytesIO(base64.b64decode(sheet['src'].split(',', 1)[1]))).convert_alpha()
-except Exception:
+        try:  # PNG normal (funciona también en el navegador con pygbag)
+            sheetImg = pygame.image.load(P('assets', 'piloto.png')).convert_alpha()
+        except Exception:
+            sheetImg = pygame.image.load(io.BytesIO(base64.b64decode(sheet['src'].split(',', 1)[1])), 'piloto.png').convert_alpha()
+except Exception as err:
+    print('No se pudo cargar el piloto:', err)
     sheet = None
 ACCENT = pilot.get('colors', {}).get('accent') or '#ff5c5c'
 VISOR = pilot.get('colors', {}).get('visor') or '#3fd8ff'
