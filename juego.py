@@ -4,7 +4,8 @@
 #  El piloto se lee de assets/piloto.json (exportado del creador web); si no hay, se usa una figura simple.
 #  Música y efectos se sintetizan con numpy (sin archivos de audio).
 # =====================================================================
-import json, math, os, random, base64, io, sys
+import asyncio, json, math, os, random, base64, io, sys
+WEB = sys.platform == 'emscripten'  # corriendo en el navegador (pygbag)
 import numpy as np
 import pygame
 
@@ -17,7 +18,7 @@ SAVE = P('partida.json')
 pygame.mixer.pre_init(22050, -16, 1, 512)
 pygame.init()
 info = pygame.display.Info()
-S = max(1, min(int(info.current_w * 0.9 // VW), int(info.current_h * 0.88 // VH)))  # escala entera
+S = 2 if WEB else max(1, min(int(info.current_w * 0.9 // VW), int(info.current_h * 0.88 // VH)))  # escala entera
 screen = pygame.display.set_mode((VW * S, VH * S))
 pygame.display.set_caption('Pixel Spacefighter')
 ctx = pygame.Surface((VW, VH))
@@ -1532,7 +1533,7 @@ def drawDust():
     ALPHA = 1
 
 # ---------- Bucle principal ----------
-def main():
+async def main():
     FONDOS.load('planetas')
     fade_s = pygame.Surface((VW * S, VH * S)); fade_s.fill((0, 0, 0))
     while True:
@@ -1563,6 +1564,7 @@ def main():
         flush_text()
         if fade.a > 0: fade_s.set_alpha(int(fade.a * 255)); screen.blit(fade_s, (0, 0))
         pygame.display.flip()
+        await asyncio.sleep(0)  # cede el control al navegador en la versión web
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())

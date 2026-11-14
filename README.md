@@ -2,7 +2,11 @@
 
 Copia en Python + Pygame de [Pixel Spacefighter](https://github.com/algorithmicslab-stack/pixel-spacefighter): juego de plataformas y peleas en 3 sectores espaciales.
 
-## Cómo jugar
+## Jugar en el navegador
+
+https://algorithmicslab-stack.github.io/pixel-spacefighter-pygame/ (haz clic en la pantalla para empezar)
+
+## Cómo jugar en tu computadora
 
 ```bash
 pip install pygame numpy
@@ -21,3 +25,12 @@ El piloto se lee de `assets/piloto.json` (exportado del [creador web](https://al
 | Empezar | Enter |
 | Pausa | P / Esc |
 | Silenciar | M |
+
+## Compilar la versión web
+
+```bash
+pip install pygbag
+python -m pygbag --build --title "Pixel Spacefighter" --ume_block 1 .
+```
+
+El resultado queda en `build/web` y se publica en la rama `gh-pages`.

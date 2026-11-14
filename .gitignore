@@ -3,3 +3,4 @@ __pycache__/
 partida.json
 .venv/
 .claude/
+build/
